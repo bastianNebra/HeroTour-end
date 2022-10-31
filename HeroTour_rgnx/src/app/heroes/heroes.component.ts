@@ -23,6 +23,8 @@ export class HeroesComponent implements OnInit {
     this.heroesState = this.store.pipe(
       map((state)=> state.heroesState)
     );
+
+    this.onGetAllHeroes();
   }
 
 

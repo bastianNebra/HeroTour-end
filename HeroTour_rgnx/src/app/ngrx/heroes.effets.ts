@@ -20,13 +20,10 @@ export class HeroesEffects {
             return  this.heroesService.getHeroes()
             .pipe(
                 map((heroes) => new GetAllHeroesActionSuccess(heroes)),
-                catchError((err)=>of(new GetAllHeroesActionError(err)))
+                catchError((err)=>of(new GetAllHeroesActionError(err.message)))
             )
         })
     ))
-
-
-    
 
 
 

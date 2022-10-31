@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { Heroes } from "../hero/heroes";
+import { Hero } from "../hero/heroes";
 
 export enum HeroesActionsTypes{
     GET_ALL_HEROES = "[Heroes] Get All Heroes",
@@ -19,7 +19,7 @@ export class GetAllHeroesAction implements Action{
 export class GetAllHeroesActionSuccess implements Action{
     type: HeroesActionsTypes = HeroesActionsTypes.GET_ALL_HEROES_SUCCESS;
 
-    constructor(public payload:Heroes[]){
+    constructor(public payload:Hero[]){
         
     }
 
