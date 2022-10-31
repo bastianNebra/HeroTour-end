@@ -1,0 +1,26 @@
+<p>heroes works!</p>
+<ng-component *ngIf="heroesState | async as state" [ngSwitch]="state.dataState">
+    <ng-container *ngSwitchCase="HeroesStateEnum.INITIAL">
+        <div class="p-2">Initial State</div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="HeroesStateEnum.LOADING">
+        <div class="p-2">Loading State</div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="HeroesStateEnum.LOADED">
+        <h2>My Heroes</h2>
+            <ul class="heroes">
+                <li *ngFor="let hero of state.heroes">
+                <button type="button">
+                <span class="badge">{{hero.id}}</span>
+                <span class="name">{{hero.name}}</span>
+                </button>
+            </li>
+            </ul>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="HeroesStateEnum.ERROR">
+        <div class="p-2">Initial State</div>
+    </ng-container>
+</ng-component>
