@@ -10,6 +10,11 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { HeroesEffects } from './ngrx/heroes.effets';
 import { heroesReducer } from './ngrx/heroes.reducer';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+import { MatSliderModule } from '@angular/material/slider';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +25,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    MatSliderModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
     StoreModule.forRoot({heroesState: heroesReducer}),
     EffectsModule.forRoot([HeroesEffects]),
     StoreDevtoolsModule.instrument()

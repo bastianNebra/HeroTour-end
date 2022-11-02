@@ -5,7 +5,7 @@ import { catchError, map, mergeMap, Observable, of } from "rxjs";
 import { HeroService } from "../hero.service";
 import { Hero } from "../hero/heroes";
 import { HEROES } from "../hero/mock-heroes";
-import { GetAllHeroesActionError, GetAllHeroesActionSuccess, HeroesActionsTypes } from "./heroes.actions";
+import { GetAllHeroesActionError, GetAllHeroesActionSuccess, GetSelectedHeroesActionError, GetSelectedHeroesActionSuccess, HeroesActions, HeroesActionsTypes } from "./heroes.actions";
 
 @Injectable()
 export class HeroesEffects {
@@ -14,17 +14,29 @@ export class HeroesEffects {
     }
 
 
-    getAllHeroesSuccessEffect : Observable<Action> = createEffect(()=>this.effectActions.pipe(
+    getAllHeroesSuccessEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe( 
         ofType(HeroesActionsTypes.GET_ALL_HEROES),
-        mergeMap((action)=>{
+        mergeMap((action:HeroesActions)=>{
             return  this.heroesService.getHeroes()
             .pipe(
                 map((heroes) => new GetAllHeroesActionSuccess(heroes)),
                 catchError((err)=>of(new GetAllHeroesActionError(err.message)))
             )
         })
-    ))
+    ));
+    
+    /** Get Selected Heroes */
 
+    getSelectedHeroesSuccessEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe( 
+        ofType(HeroesActionsTypes.GET_SELECTED_HEROES),
+        mergeMap((action:HeroesActions)=>{
+            return  this.heroesService.getHero(action.payload)
+            .pipe(
+                map((hero) => new GetSelectedHeroesActionSuccess(hero)),
+                //catchError((err01)=>of(new GetSelectedHeroesActionError(err01.message)))
+            )
+        })
+    ));
 
 
 }
