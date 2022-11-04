@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { HeroService } from '../hero.service';
 import { Hero } from '../hero/heroes';
-import { GetAllHeroesAction } from '../ngrx/heroes.actions';
+import {GetAllHeroesAction, GetSelectedHeroAction} from '../ngrx/heroes.actions';
 import { HeroesState, HeroesStateEnum } from '../ngrx/heroes.reducer';
 
 @Component({
@@ -23,18 +23,12 @@ export class HeroesComponent implements OnInit {
     this.heroesState = this.store.pipe(
       map((state)=> state.heroesState)
     );
-
     this.onGetAllHeroes();
-
   }
 
 
   onGetAllHeroes(){
     this.store.dispatch(new GetAllHeroesAction({}))
-  }
-
-  onGetSelectedHeroes(){
-
   }
 
 

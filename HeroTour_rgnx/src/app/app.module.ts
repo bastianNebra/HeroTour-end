@@ -14,13 +14,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { MatSliderModule } from '@angular/material/slider';
+import { HeroDetailsComponent } from './hero-details/hero-details.component';
+import {MatSortModule} from "@angular/material/sort";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeroDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,11 +37,19 @@ import { MatSliderModule } from '@angular/material/slider';
     HttpClientModule,
     MatSliderModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
+      InMemoryDataService, {dataEncapsulation: false}
     ),
     StoreModule.forRoot({heroesState: heroesReducer}),
     EffectsModule.forRoot([HeroesEffects]),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    MatSortModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    BrowserAnimationsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

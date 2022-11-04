@@ -12,16 +12,16 @@ export enum HeroesActionsTypes{
     GET_CAT_HEROES_ERROR = "[Heroes] Get All Heroes Error",
 
     //get selected Heroes
-    GET_SELECTED_HEROES = "[Heroes] Get All Heroes",
-    GET_SELECTED_HEROES_SUCCESS = "[Heroes] Get All Heroes Success",
-    GET_SELECTED_HEROES_ERROR = "[Heroes] Get All Heroes Error",
+    GET_SELECTED_HERO = "[Hero] Get Select Hero",
+    GET_SELECTED_HERO_SUCCESS = "[Hero] Get Select Hero Success",
+    GET_SELECTED_HERO_ERROR = "[Hero] Get Select Hero Error",
 }
 
 export class GetAllHeroesAction implements Action{
     type: HeroesActionsTypes = HeroesActionsTypes.GET_ALL_HEROES;
 
     constructor(public payload:any){
-        
+
     }
 }
 
@@ -29,7 +29,7 @@ export class GetAllHeroesActionSuccess implements Action{
     type: HeroesActionsTypes = HeroesActionsTypes.GET_ALL_HEROES_SUCCESS;
 
     constructor(public payload:Hero[]){
-        
+
     }
 
 }
@@ -38,39 +38,39 @@ export class GetAllHeroesActionError implements Action{
     type: HeroesActionsTypes = HeroesActionsTypes.GET_ALL_HEROES_ERROR;
 
     constructor(public payload:string){
-        
+
     }
 
 }
 
-//get selected Heroes Actions
+//get select Hero Actions
 
-export class GetSelectedHeroesAction implements Action{
-    type: HeroesActionsTypes = HeroesActionsTypes.GET_SELECTED_HEROES;
+export class GetSelectedHeroAction implements Action{
+    type: HeroesActionsTypes = HeroesActionsTypes.GET_SELECTED_HERO;
 
     constructor(public payload:any){
-        
+
     }
 }
 
-export class GetSelectedHeroesActionSuccess implements Action{
-    type: HeroesActionsTypes = HeroesActionsTypes.GET_SELECTED_HEROES_SUCCESS;
+export class GetSelectedHeroActionSuccess implements Action{
+    type: HeroesActionsTypes = HeroesActionsTypes.GET_SELECTED_HERO_SUCCESS;
 
     constructor(public payload: Hero){
-        
+
     }
 
 }
 
-export class GetSelectedHeroesActionError implements Action{
-    type: HeroesActionsTypes = HeroesActionsTypes.GET_SELECTED_HEROES_ERROR;
+export class GetSelectedHeroActionError implements Action{
+    type: HeroesActionsTypes = HeroesActionsTypes.GET_SELECTED_HERO_ERROR;
 
     constructor(public payload:string){
-        
+
     }
 
 }
 
 export type HeroesActions = GetAllHeroesAction | GetAllHeroesActionSuccess | GetAllHeroesActionError |
 
-GetSelectedHeroesAction | GetSelectedHeroesActionSuccess | GetSelectedHeroesActionError;
+GetSelectedHeroAction | GetSelectedHeroActionSuccess | GetSelectedHeroActionError;
