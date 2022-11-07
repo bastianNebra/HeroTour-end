@@ -5,7 +5,7 @@ import { map, Observable, VirtualTimeScheduler } from 'rxjs';
 import { HeroService } from '../hero.service';
 import { Hero } from '../hero/heroes';
 import { GetAllHeroesAction } from '../ngrx/heroes.actions';
-import { HeroesState } from '../ngrx/heroes.reducer';
+import { HeroesState,HeroesStateEnum } from '../ngrx/heroes.reducer';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   heroes: Hero[] = [];
 
   heroesState: Observable<HeroesState> | null = null;
+  readonly HeroesStateEnum = HeroesStateEnum;
 
   constructor(private heroService: HeroService,private store: Store<any>) { }
 
@@ -28,8 +29,8 @@ export class DashboardComponent implements OnInit {
 
   getHeroes(): void {
     this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes.slice(1, 5));
+    this.store.dispatch(new GetAllHeroesAction({}));
   }
 
-  
+
 }

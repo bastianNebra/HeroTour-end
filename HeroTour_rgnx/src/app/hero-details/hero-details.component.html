@@ -1,38 +1,49 @@
 
-<div>
+<div class="main-div">
 
-  <div *ngIf="heroState | async as state" [ngSwitch]="state.dataState">
+  <div *ngIf="state">
 
-    <div *ngSwitchCase="HeroesStateEnum.INITIAL">
-      <div>Initial State</div>
-    </div>
-
-    <div *ngSwitchCase="HeroesStateEnum.LOADING">
+    <div *ngIf="state.dataState == HeroesStateEnum.LOADING">
       <div>Loading ...</div>
     </div>
 
-    <div *ngSwitchCase="HeroesStateEnum.LOADED">
-
-      <ul class="heroes">
-
-          <h2>{{ state.hero.name | uppercase }} DETAILS</h2>
-
-            <div mat-card-title class="badge">{{state.hero.id}}</div>
-
-            <form class="hero-form">
-              <mat-form-field class="hero-full-width" appearance="fill">
-                <mat-label>Hero name</mat-label>
-                <input matInput #message maxlength="25" [(ngModel)]="state.hero.name" placeholder="Hero name" name="state.hero.name">
-                <mat-hint align="start"><strong>Change a Name of Hero</strong> </mat-hint>
-                <mat-hint align="end">{{message.value.length}} / 25</mat-hint>
-
-              </mat-form-field>
-            </form>
-
-      </ul>
+    <div *ngIf="state.dataState ==HeroesStateEnum.ERROR">
+      {{
+      state.errorMessage
+      }}
     </div>
 
-    <div *ngSwitchCase="HeroesStateEnum.ERROR">
+    <div *ngIf="state.dataState ==HeroesStateEnum.UPDATED">
+      <span>Hero Update Successfully</span>
+      <button (click)="okUpdated()"> Ok</button>
+    </div>
+
+    <div *ngIf="state.dataState ==HeroesStateEnum.LOADED" >
+
+
+      <div mat-divider class="heroes">
+
+            <form [formGroup]="heroFormGroup" (ngSubmit)="onUpdateHero()">
+
+              <div class="hero-full-width" appearance="fill">
+
+                <mat-label>Hero ID</mat-label>
+                <input  type="text" formControlName="id" id="id" name="id">
+                <mat-label>Hero name</mat-label>
+
+                <input   formControlName="name" maxlength="25"  name="name">
+
+
+              </div>
+
+              <button type="submit">Save</button>
+            </form>
+
+      </div >
+
+    </div>
+
+    <div *ngIf="state.dataState ==HeroesStateEnum.ERROR">
       <div class="p-2">{{ state.errorMessage }}</div>
     </div>
   </div>

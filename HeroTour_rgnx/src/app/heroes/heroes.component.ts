@@ -6,6 +6,7 @@ import { HeroService } from '../hero.service';
 import { Hero } from '../hero/heroes';
 import {GetAllHeroesAction, GetSelectedHeroAction} from '../ngrx/heroes.actions';
 import { HeroesState, HeroesStateEnum } from '../ngrx/heroes.reducer';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-heroes',
@@ -16,8 +17,10 @@ export class HeroesComponent implements OnInit {
 
   heroesState: Observable<HeroesState> | null = null;
   readonly HeroesStateEnum = HeroesStateEnum;
+  private heroes: any;
 
-  constructor(private heroService: HeroService,private store:Store<any>) { }
+  constructor(private heroService: HeroService,private store:Store<any>,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.heroesState = this.store.pipe(
@@ -31,8 +34,7 @@ export class HeroesComponent implements OnInit {
     this.store.dispatch(new GetAllHeroesAction({}))
   }
 
-
-  //
-
-
+  onEdit(hero: Hero) {
+    this.router.navigateByUrl("hero-details/"+hero.id)
+  }
 }

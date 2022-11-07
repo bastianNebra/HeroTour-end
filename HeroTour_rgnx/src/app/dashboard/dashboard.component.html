@@ -1,6 +1,27 @@
 <h2>Top Heroes</h2>
-<div class="heroes-menu">
-  <a *ngFor="let hero of heroes">
-    {{hero.name}}
-  </a>
+
+<div *ngIf="heroesState | async as state" [ngSwitch]="state.dataState">
+
+  <div *ngSwitchCase="HeroesStateEnum.INITIAL">
+    <div>Initial State</div>
+  </div>
+
+  <div *ngSwitchCase="HeroesStateEnum.LOADING">
+    <div>Loading ...</div>
+  </div>
+
+  <div *ngSwitchCase="HeroesStateEnum.LOADED">
+
+    <div class="heroes-menu">
+      <a *ngFor="let hero of state.heroes.slice(1,5)" routerLink="/hero-details/{{hero.id}}">
+        {{ hero.name}}
+      </a>
+    </div>
+
+  </div>
+
+  <div *ngSwitchCase="HeroesStateEnum.ERROR">
+    <div class="p-2">{{ state.errorMessage }}</div>
+  </div>
 </div>
+

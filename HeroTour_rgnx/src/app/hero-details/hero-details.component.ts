@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {Hero} from "../hero/heroes";
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {HeroService} from "../hero.service";
 import {Location} from "@angular/common";
-import {GetSelectedHeroAction} from "../ngrx/heroes.actions";
+import {EditHeroAction, GetSelectedHeroAction, UpdateHeroAction} from "../ngrx/heroes.actions";
 import {Store} from "@ngrx/store";
-import {map, Observable} from "rxjs";
 import {HeroesState, HeroesStateEnum} from "../ngrx/heroes.reducer";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-hero-details',
@@ -17,44 +16,60 @@ import {HeroesState, HeroesStateEnum} from "../ngrx/heroes.reducer";
 
 
 export class HeroDetailsComponent implements OnInit {
-    hero: Hero | null =null;
+   heroID :number;
+   state: HeroesState | null = null;
+   // @ts-ignore
+  heroFormGroup:FormGroup;
 
-   id :Number  =Number(this.route.snapshot.paramMap.get("id"));
-
-  heroState: Observable<HeroesState> | null = null;
-  readonly HeroesStateEnum = HeroesStateEnum;
+   readonly HeroesStateEnum = HeroesStateEnum;
 
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
     private location : Location,
-    private store : Store<any>
-  ) { }
+    private store : Store<any>,
+    private fb: FormBuilder
+  ) {
+    this.heroID = route.snapshot.params['id'];
+    console.log(this.heroID);
+  }
 
   ngOnInit(): void {
 
-    this.onGetSelectedHeroes(this.id)
+   this.store.dispatch(new EditHeroAction(this.heroID));
+   this.store.subscribe(state=>{
+     this.state  = state.heroesState;
 
+     if (this.state?.dataState == HeroesStateEnum.LOADED){
+       if (this.state.currentHero != null){
+         this.heroFormGroup = this.fb.group({
+          id:[this.state.currentHero.id,Validators.required],
+           name:[this.state.currentHero.name,Validators.required]
+         })
+       }
+     }
+   })
 
-    this.heroState = this.store.pipe(
-      map((state)=> state.heroesState)
-    );
   }
 
-
-  getHeroDetail(){
-    this.heroService.getHero(this.id).subscribe(
-      hero => this.hero = hero
-    );
-  }
 
   onGetSelectedHeroes(hero: Number){
-    console.log(hero);
     this.store.dispatch(new GetSelectedHeroAction(hero))
   }
+
+
 
   goBack(): void {
     this.location.back()
   }
 
+
+  okUpdated() {
+
+  }
+
+  onUpdateHero() {
+    if (this.heroFormGroup?.invalid) return;
+    this.store.dispatch(new UpdateHeroAction(this.heroFormGroup?.value))
+  }
 }

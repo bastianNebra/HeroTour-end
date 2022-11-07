@@ -15,6 +15,27 @@ export enum HeroesActionsTypes{
     GET_SELECTED_HERO = "[Hero] Get Select Hero",
     GET_SELECTED_HERO_SUCCESS = "[Hero] Get Select Hero Success",
     GET_SELECTED_HERO_ERROR = "[Hero] Get Select Hero Error",
+
+
+    //New Hero
+    NEW_HERO = "[Hero] New Hero",
+    NEW_HERO_SUCCESS = "[Hero] New Hero Success",
+    NEW_HERO_ERROR = "[Hero] New Hero Error",
+
+    //Save Hero
+    SAVE_HERO = "[Hero] New Hero",
+    SAVE_HERO_SUCCESS = "[Hero] New Hero Success",
+    SAVE_HERO_ERROR = "[Hero] New Hero Error",
+
+    //EDit Hero
+    EDIT_HERO = "[Hero] Edit Hero",
+    EDIT_HERO_SUCCESS = "[Hero] Edit Hero Success",
+    EDIT_HERO_ERROR = "[Hero] Edit Hero Error",
+
+    //Update Hero
+    UPDATE_HERO = "[Hero] Update Hero",
+    UPDATE_HERO_SUCCESS = "[Hero] Update Hero Success",
+    UPDATE_HERO_ERROR = "[Hero] Update Hero Error",
 }
 
 export class GetAllHeroesAction implements Action{
@@ -71,6 +92,125 @@ export class GetSelectedHeroActionError implements Action{
 
 }
 
-export type HeroesActions = GetAllHeroesAction | GetAllHeroesActionSuccess | GetAllHeroesActionError |
+//New Hero Actions
 
-GetSelectedHeroAction | GetSelectedHeroActionSuccess | GetSelectedHeroActionError;
+export class NewHeroAction implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.NEW_HERO;
+
+  constructor(public payload:any){
+
+  }
+}
+
+export class NewHeroActionSuccess implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.NEW_HERO_SUCCESS;
+
+  constructor(public payload: any){
+
+  }
+
+}
+
+export class NewHeroActionError implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.NEW_HERO_ERROR;
+
+  constructor(public payload:string){
+
+  }
+
+}
+
+
+//Save Hero Actions
+export class SaveHeroAction implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.SAVE_HERO;
+
+  constructor(public payload:Hero){
+
+  }
+}
+
+export class SaveHeroActionSuccess implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.SAVE_HERO_SUCCESS;
+
+  constructor(public payload: Hero){
+
+  }
+
+}
+
+export class SaveHeroActionError implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.SAVE_HERO_SUCCESS;
+
+  constructor(public payload:string){
+
+  }
+
+}
+
+//Edit Hero Actions
+export class EditHeroAction implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.EDIT_HERO;
+
+  constructor(public payload:number){
+
+  }
+}
+
+export class EditHeroActionSuccess implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.EDIT_HERO_SUCCESS;
+
+  constructor(public payload: Hero){
+
+  }
+
+}
+
+export class EditHeroActionError implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.EDIT_HERO_ERROR;
+
+  constructor(public payload:string){
+
+  }
+
+}
+
+//Update Hero Actions
+export class UpdateHeroAction implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.UPDATE_HERO;
+
+  constructor(public payload: Hero){
+
+  }
+}
+
+export class UpdateHeroActionSuccess implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.UPDATE_HERO_SUCCESS;
+
+  constructor(public payload: Hero){
+
+  }
+
+}
+
+export class UpdateHeroActionError implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.UPDATE_HERO_ERROR;
+
+  constructor(public payload:string){
+
+  }
+
+}
+
+export type HeroesActions =
+  GetAllHeroesAction | GetAllHeroesActionSuccess | GetAllHeroesActionError |
+
+  GetSelectedHeroAction | GetSelectedHeroActionSuccess | GetSelectedHeroActionError|
+
+  NewHeroAction | NewHeroActionSuccess | NewHeroActionError|
+
+  SaveHeroAction | SaveHeroActionSuccess | SaveHeroActionError |
+
+  EditHeroAction | EditHeroActionSuccess | EditHeroActionError|
+
+  UpdateHeroAction | UpdateHeroActionSuccess | UpdateHeroActionError;
