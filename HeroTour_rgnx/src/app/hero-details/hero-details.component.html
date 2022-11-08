@@ -4,13 +4,11 @@
   <div *ngIf="state">
 
     <div *ngIf="state.dataState == HeroesStateEnum.LOADING">
-      <div>Loading ...</div>
+      <mat-spinner mode="indeterminate">Loading ...</mat-spinner>
     </div>
 
     <div *ngIf="state.dataState ==HeroesStateEnum.ERROR">
-      {{
-      state.errorMessage
-      }}
+      {{state.errorMessage}}
     </div>
 
     <div *ngIf="state.dataState ==HeroesStateEnum.UPDATED">
@@ -28,10 +26,11 @@
               <div class="hero-full-width" appearance="fill">
 
                 <mat-label>Hero ID</mat-label>
-                <input  type="text" formControlName="id" id="id" name="id">
+                <input  type="text" formControlName="id" id="id" >
+
                 <mat-label>Hero name</mat-label>
 
-                <input   formControlName="name" maxlength="25"  name="name">
+                <input   formControlName="name" maxlength="25"  >
 
 
               </div>

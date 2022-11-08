@@ -7,7 +7,7 @@
   </div>
 
   <div *ngSwitchCase="HeroesStateEnum.LOADING">
-    <div>Loading ...</div>
+    <mat-spinner mode="indeterminate">Loading ...</mat-spinner>
   </div>
 
   <div *ngSwitchCase="HeroesStateEnum.LOADED">

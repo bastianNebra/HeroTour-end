@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 import { Hero } from "../hero/heroes";
 import { HeroesActions, HeroesActionsTypes } from "./heroes.actions";
-import {HEROES} from "../hero/mock-heroes";
+
 
 export enum HeroesStateEnum{
     LOADING = "Loading",
@@ -18,7 +18,7 @@ export interface HeroesState{
     hero:Hero;
     errorMessage:string,
     dataState:HeroesStateEnum,
-  currentHero?:Hero| null,
+    currentHero:Hero| null,
 }
 
 
@@ -38,6 +38,7 @@ export function heroesReducer(state: HeroesState = initState, action:Action):Her
         case HeroesActionsTypes.GET_ALL_HEROES:
             return {...state, dataState:HeroesStateEnum.LOADING}
         case HeroesActionsTypes.GET_ALL_HEROES_SUCCESS:
+          console.log("Initstate by Get All "+ (<HeroesActions>action).payload);
             return {...state, dataState: HeroesStateEnum.LOADED, heroes:(<HeroesActions>action).payload}
         case HeroesActionsTypes.GET_ALL_HEROES_ERROR:
             return {...state,dataState:HeroesStateEnum.ERROR, errorMessage:(<HeroesActions>action).payload}
@@ -75,24 +76,39 @@ export function heroesReducer(state: HeroesState = initState, action:Action):Her
         case HeroesActionsTypes.EDIT_HERO:
           return {...state, dataState:HeroesStateEnum.LOADING}
         case HeroesActionsTypes.EDIT_HERO_SUCCESS:
+          console.log("Update Hero Objekt "+ (<HeroesActions>action).payload);
           return {...state, dataState: HeroesStateEnum.LOADED,currentHero:(<HeroesActions>action).payload}
         case HeroesActionsTypes.EDIT_HERO_ERROR:
           return {...state,dataState:HeroesStateEnum.ERROR, errorMessage:(<HeroesActions>action).payload}
 
-      /** Update Hero */
-      case HeroesActionsTypes.UPDATE_HERO:
-        return {...state, dataState:HeroesStateEnum.LOADING}
-      case HeroesActionsTypes.UPDATE_HERO_SUCCESS:
-        let updateHero: Hero = (<HeroesActions>action).payload
+        /** Update Hero */
+        case HeroesActionsTypes.UPDATE_HERO:
+          return {...state, dataState:HeroesStateEnum.LOADING}
+        case HeroesActionsTypes.UPDATE_HERO_SUCCESS:
+          let updateHero: Hero = (<HeroesActions>action).payload
 
+          console.log("Update Hero Objekt "+ (<HeroesActions>action).payload);
+          let heroesList :Hero[]  = state.heroes.map(h=>(h.id==updateHero.id)?updateHero:h);
 
-        console.log("1 "+ updateHero);
+          return {...state, dataState: HeroesStateEnum.UPDATED,heroes:heroesList}
+        case HeroesActionsTypes.UPDATE_HERO_ERROR:
+          return {...state,dataState:HeroesStateEnum.ERROR, errorMessage:(<HeroesActions>action).payload}
 
-        let heroesList :Hero[]  = state.heroes.map(h=>(h.id==updateHero.id)?updateHero:h);
+        /** Delete Hero */
+        case HeroesActionsTypes.DELETE_HERO:
+          return {...state, dataState:HeroesStateEnum.LOADING}
+        case HeroesActionsTypes.DELETE_HERO_SUCCESS:
+          let deleteHero: Hero = (<HeroesActions>action).payload
+          console.log("1 "+ (<HeroesActions>action).payload);
 
-        return {...state, dataState: HeroesStateEnum.UPDATED,heroes:heroesList}
-      case HeroesActionsTypes.UPDATE_HERO_ERROR:
-        return {...state,dataState:HeroesStateEnum.ERROR, errorMessage:(<HeroesActions>action).payload}
+          let index = state.heroes.indexOf(deleteHero);
+          let newHeroesList :Hero[]  = [...state.heroes]
+          newHeroesList.slice(index,1);
+
+          return {...state, dataState: HeroesStateEnum.UPDATED,heroes:newHeroesList}
+        case HeroesActionsTypes.DELETE_HERO_ERROR:
+          return {...state,dataState:HeroesStateEnum.ERROR, errorMessage:(<HeroesActions>action).payload}
+
           default: return {...state}
     }
 

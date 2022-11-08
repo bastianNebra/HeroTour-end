@@ -45,7 +45,7 @@ export class HeroDetailsComponent implements OnInit {
          this.heroFormGroup = this.fb.group({
           id:[this.state.currentHero.id,Validators.required],
            name:[this.state.currentHero.name,Validators.required]
-         })
+         });
        }
      }
    })
@@ -65,7 +65,7 @@ export class HeroDetailsComponent implements OnInit {
 
 
   okUpdated() {
-
+    this.store.dispatch(new EditHeroAction(this.heroID))
   }
 
   onUpdateHero() {

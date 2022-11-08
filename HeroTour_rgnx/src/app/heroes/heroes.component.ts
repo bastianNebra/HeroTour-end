@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { HeroService } from '../hero.service';
 import { Hero } from '../hero/heroes';
-import {GetAllHeroesAction, GetSelectedHeroAction} from '../ngrx/heroes.actions';
+import {DeleteHeroAction, GetAllHeroesAction, GetSelectedHeroAction} from '../ngrx/heroes.actions';
 import { HeroesState, HeroesStateEnum } from '../ngrx/heroes.reducer';
 import {Router} from "@angular/router";
 
@@ -19,7 +19,8 @@ export class HeroesComponent implements OnInit {
   readonly HeroesStateEnum = HeroesStateEnum;
   private heroes: any;
 
-  constructor(private heroService: HeroService,private store:Store<any>,
+  constructor(private heroService: HeroService,
+              private store:Store<any>,
               private router:Router) { }
 
   ngOnInit(): void {
@@ -37,4 +38,9 @@ export class HeroesComponent implements OnInit {
   onEdit(hero: Hero) {
     this.router.navigateByUrl("hero-details/"+hero.id)
   }
+
+  onDelete(hero: Hero) {
+      this.store.dispatch(new DeleteHeroAction(hero))
+  }
+
 }

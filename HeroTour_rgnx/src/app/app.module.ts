@@ -26,6 +26,8 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatDividerModule} from "@angular/material/divider";
 import { NewHeroComponent } from './new-hero/new-hero.component';
 import { EditHeroComponent } from './edit-hero/edit-hero.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -37,29 +39,31 @@ import { EditHeroComponent } from './edit-hero/edit-hero.component';
     NewHeroComponent,
     EditHeroComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        MatSliderModule,
-        HttpClientInMemoryWebApiModule.forRoot(
-            InMemoryDataService, {dataEncapsulation: false}
-        ),
-        StoreModule.forRoot({heroesState: heroesReducer}),
-        EffectsModule.forRoot([HeroesEffects]),
-        StoreDevtoolsModule.instrument(),
-        MatSortModule,
-        MatButtonModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatBadgeModule,
-        MatDividerModule,
-        ReactiveFormsModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatSliderModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {dataEncapsulation: false}
+    ),
+    StoreModule.forRoot({heroesState: heroesReducer}),
+    EffectsModule.forRoot([HeroesEffects]),
+    StoreDevtoolsModule.instrument(),
+    MatSortModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatBadgeModule,
+    MatDividerModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
 
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

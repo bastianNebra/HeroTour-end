@@ -16,6 +16,11 @@ export enum HeroesActionsTypes{
     GET_SELECTED_HERO_SUCCESS = "[Hero] Get Select Hero Success",
     GET_SELECTED_HERO_ERROR = "[Hero] Get Select Hero Error",
 
+    //Delete Hero
+    DELETE_HERO = "[Hero] Delete Hero",
+    DELETE_HERO_SUCCESS = "[Hero] Delete Hero Success",
+    DELETE_HERO_ERROR = "[Hero] Delete Hero Error",
+
 
     //New Hero
     NEW_HERO = "[Hero] New Hero",
@@ -97,6 +102,7 @@ export class GetSelectedHeroActionError implements Action{
 export class NewHeroAction implements Action{
   type: HeroesActionsTypes = HeroesActionsTypes.NEW_HERO;
 
+  //Kein Parameter ist hier notwendig
   constructor(public payload:any){
 
   }
@@ -105,6 +111,7 @@ export class NewHeroAction implements Action{
 export class NewHeroActionSuccess implements Action{
   type: HeroesActionsTypes = HeroesActionsTypes.NEW_HERO_SUCCESS;
 
+  //Kein Parameter ist hier notwendig
   constructor(public payload: any){
 
   }
@@ -202,7 +209,35 @@ export class UpdateHeroActionError implements Action{
 
 }
 
+//Delete Hero Actions
+export class DeleteHeroAction implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.DELETE_HERO;
+
+  constructor(public payload: Hero){
+
+  }
+}
+
+export class DeleteHeroActionSuccess implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.DELETE_HERO_SUCCESS;
+
+  constructor(public payload: Hero){
+
+  }
+
+}
+
+export class DeleteHeroActionError implements Action{
+  type: HeroesActionsTypes = HeroesActionsTypes.DELETE_HERO_ERROR;
+
+  constructor(public payload:string){
+
+  }
+
+}
+
 export type HeroesActions =
+
   GetAllHeroesAction | GetAllHeroesActionSuccess | GetAllHeroesActionError |
 
   GetSelectedHeroAction | GetSelectedHeroActionSuccess | GetSelectedHeroActionError|
@@ -213,4 +248,6 @@ export type HeroesActions =
 
   EditHeroAction | EditHeroActionSuccess | EditHeroActionError|
 
-  UpdateHeroAction | UpdateHeroActionSuccess | UpdateHeroActionError;
+  UpdateHeroAction | UpdateHeroActionSuccess | UpdateHeroActionError |
+
+  DeleteHeroAction | DeleteHeroActionSuccess | DeleteHeroActionError;

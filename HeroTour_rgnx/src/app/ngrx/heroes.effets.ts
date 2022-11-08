@@ -6,6 +6,8 @@ import { HeroService } from "../hero.service";
 import { Hero } from "../hero/heroes";
 import { HEROES } from "../hero/mock-heroes";
 import {
+  DeleteHeroActionError,
+  DeleteHeroActionSuccess,
   EditHeroActionError,
   EditHeroActionSuccess,
   GetAllHeroesActionError,
@@ -50,7 +52,7 @@ export class HeroesEffects {
 
   /** New Hero */
 
-  NewHeroEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe(
+  newHeroEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe(
     ofType(HeroesActionsTypes.NEW_HERO),
     map((action:HeroesActions)=>{
       return new NewHeroActionSuccess({})
@@ -59,8 +61,7 @@ export class HeroesEffects {
 
 
   /** Save Hero */
-
-  SaveHeroEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe(
+  saveHeroEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe(
     ofType(HeroesActionsTypes.SAVE_HERO),
     mergeMap((action:HeroesActions)=>{
       return this.heroesService.addHero(action.payload)
@@ -74,7 +75,7 @@ export class HeroesEffects {
 
   /** Edit Hero */
 
-  EditHeroEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe(
+  editHeroEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe(
     ofType(HeroesActionsTypes.EDIT_HERO),
     mergeMap((action:HeroesActions)=>{
       return this.heroesService.getHero(action.payload)
@@ -85,15 +86,28 @@ export class HeroesEffects {
     })
   ));
 
-  /** Edit Hero */
+  /** Update Hero */
 
-  UpdateHeroEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe(
+  updateHeroEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe(
     ofType(HeroesActionsTypes.UPDATE_HERO),
     mergeMap((action:HeroesActions)=>{
       return this.heroesService.updateHero(action.payload)
         .pipe(
           map((hero) => new UpdateHeroActionSuccess(hero)),
-          //catchError((err01)=>of(new UpdateHeroActionError(err01.message)))
+          catchError((err01)=>of(new UpdateHeroActionError(err01.message)))
+        )
+    })
+  ));
+
+  /** Delete Hero */
+
+  deleteHeroEffect : Observable<HeroesActions> = createEffect(()=>this.effectActions.pipe(
+    ofType(HeroesActionsTypes.DELETE_HERO),
+    mergeMap((action:HeroesActions)=>{
+      return this.heroesService.deleteHero(action.payload)
+        .pipe(
+          map((hero) => new DeleteHeroActionSuccess(hero)),
+          catchError((err01)=>of(new DeleteHeroActionError(err01.message)))
         )
     })
   ));
