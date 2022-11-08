@@ -1,0 +1,34 @@
+<h2>New Hero</h2>
+<div *ngIf="heroFormGroup">
+  <div *ngIf="state as data">
+
+
+    <div *ngIf="data.dataState==HeroeStateEnum.LOADING">
+      <mat-spinner mode="indeterminate">Loading ...</mat-spinner>
+    </div>
+
+    <div *ngIf="data.dataState==HeroeStateEnum.LOADED">
+      <span>Hero saved Successfully</span>
+      <button mat-button (click)="newHero()">New Hero</button>
+    </div>
+
+    <div *ngIf="data.dataState==HeroeStateEnum.NEW">
+
+      <form [formGroup]="heroFormGroup" (ngSubmit)="onSaveHero()">
+        <mat-form-field>
+          <label for="name">Name Hero</label>
+          <input matInput type="text" formControlName="name" id="name" required
+                 [ngClass]="{'invalid':submitted && heroFormGroup.controls['name'].errors}">
+        </mat-form-field>
+
+        <div mat-dialog-actions >
+          <button mat-button [disabled]="heroFormGroup.invalid" type="submit"> Save</button>
+        </div>
+      </form>
+
+
+    </div>
+
+
+  </div>
+</div>
