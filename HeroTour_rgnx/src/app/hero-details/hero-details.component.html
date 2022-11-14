@@ -4,7 +4,8 @@
   <div *ngIf="state">
 
     <div *ngIf="state.dataState == HeroesStateEnum.LOADING">
-      <mat-spinner mode="indeterminate">Loading ...</mat-spinner>
+      <mat-progress-bar mode="query">Loading ...</mat-progress-bar>
+
     </div>
 
     <div *ngIf="state.dataState ==HeroesStateEnum.ERROR">
@@ -13,7 +14,7 @@
 
     <div *ngIf="state.dataState ==HeroesStateEnum.UPDATED">
       <span>Hero Update Successfully</span>
-      <button (click)="okUpdated()"> Ok</button>
+      <button mat-raised-button color="accent" (click)="okUpdated()"> Ok</button>
     </div>
 
     <div *ngIf="state.dataState ==HeroesStateEnum.LOADED" >
@@ -21,24 +22,27 @@
 
       <div mat-divider class="heroes">
 
-            <form [formGroup]="heroFormGroup" (ngSubmit)="onUpdateHero()">
-
-              <div class="hero-full-width" appearance="fill">
-
-                <mat-label>Hero ID</mat-label>
-                <input  type="text" formControlName="id" id="id" >
-
-                <mat-label>Hero name</mat-label>
-
-                <input   formControlName="name" maxlength="25"  >
+            <form [formGroup]="heroFormGroup" (ngSubmit)="onUpdateHero()" fxLayout="column" fxLayoutAlign="center center">
 
 
-              </div>
+                <mat-form-field>
+                  <mat-label>Hero ID: {{ heroID }}</mat-label>
+                  <input matInput  type="text" formControlName="id" id="id" [disabled]="true">
+                </mat-form-field>
 
-              <button type="submit">Save</button>
+                <mat-form-field>
+                  <mat-label>Hero name</mat-label>
+                  <input matInput  formControlName="name" maxlength="25"  >
+                </mat-form-field>
+
+
+
+              <button mat-raised-button color="primary" type="submit">Save</button>
             </form>
 
       </div >
+
+
 
     </div>
 
@@ -47,5 +51,5 @@
     </div>
   </div>
 
-  <button mat-button (click)="goBack()">Back</button>
+  <button mat-raised-button color="warn" (click)="goBack()">Back</button>
 </div>

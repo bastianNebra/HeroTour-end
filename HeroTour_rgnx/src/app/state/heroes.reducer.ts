@@ -83,14 +83,10 @@ export function heroesReducer(state: HeroesState = initState, action:Action):Her
 
         /** Update Hero */
         case HeroesActionsTypes.UPDATE_HERO:
+          console.log("Update Hero Objekt UPDATE_HERO"+ (<HeroesActions>action).payload);
           return {...state, dataState:HeroesStateEnum.LOADING}
         case HeroesActionsTypes.UPDATE_HERO_SUCCESS:
-          let updateHero: Hero = (<HeroesActions>action).payload
-
-          console.log("Update Hero Objekt "+ (<HeroesActions>action).payload);
-          let heroesList :Hero[]  = state.heroes.map(h=>(h.id==updateHero.id)?updateHero:h);
-
-          return {...state, dataState: HeroesStateEnum.UPDATED,heroes:heroesList}
+          return {...state, dataState: HeroesStateEnum.UPDATED}
         case HeroesActionsTypes.UPDATE_HERO_ERROR:
           return {...state,dataState:HeroesStateEnum.ERROR, errorMessage:(<HeroesActions>action).payload}
 
@@ -99,12 +95,9 @@ export function heroesReducer(state: HeroesState = initState, action:Action):Her
           return {...state, dataState:HeroesStateEnum.LOADING}
         case HeroesActionsTypes.DELETE_HERO_SUCCESS:
           let deleteHero: Hero = (<HeroesActions>action).payload
-          console.log("1 "+ (<HeroesActions>action).payload);
-
           let index = state.heroes.indexOf(deleteHero);
           let newHeroesList :Hero[]  = [...state.heroes]
-          newHeroesList.slice(index,1);
-
+          newHeroesList.splice(index,1);
           return {...state, dataState: HeroesStateEnum.UPDATED,heroes:newHeroesList}
         case HeroesActionsTypes.DELETE_HERO_ERROR:
           return {...state,dataState:HeroesStateEnum.ERROR, errorMessage:(<HeroesActions>action).payload}

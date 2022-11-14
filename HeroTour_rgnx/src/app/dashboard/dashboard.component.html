@@ -13,9 +13,9 @@
   <div *ngSwitchCase="HeroesStateEnum.LOADED">
 
     <div class="heroes-menu">
-      <a *ngFor="let hero of state.heroes.slice(1,5)" routerLink="/hero-details/{{hero.id}}">
+      <button mat-raised-button color="primary" *ngFor="let hero of state.heroes.slice(1,5)" routerLink="/hero-details/{{hero.id}}">
         {{ hero.name}}
-      </a>
+      </button>
     </div>
 
   </div>

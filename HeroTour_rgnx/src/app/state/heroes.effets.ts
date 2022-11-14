@@ -32,7 +32,7 @@ export class HeroesEffects {
             return  this.heroesService.getHeroes()
             .pipe(
                 map((heroes) => new GetAllHeroesActionSuccess(heroes)),
-                //catchError((err)=>of(new GetAllHeroesActionError(err.message)))
+                catchError((err)=>of(new GetAllHeroesActionError(err.message)))
             )
         })
     ));
@@ -45,7 +45,7 @@ export class HeroesEffects {
             return  this.heroesService.getHero(action.payload)
             .pipe(
                 map((hero) => new GetSelectedHeroActionSuccess(hero)),
-                //catchError((err01)=>of(new GetSelectedHeroesActionError(err01.message)))
+                catchError((err01)=>of(new GetSelectedHeroActionError(err01.message)))
             )
         })
     ));
@@ -107,7 +107,7 @@ export class HeroesEffects {
       return this.heroesService.deleteHero(action.payload)
         .pipe(
           map((hero) => new DeleteHeroActionSuccess(hero)),
-          catchError((err01)=>of(new DeleteHeroActionError(err01.message)))
+          //catchError((err01)=>of(new DeleteHeroActionError(err01.message)))
         )
     })
   ));
