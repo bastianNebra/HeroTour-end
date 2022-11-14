@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { map, Observable, VirtualTimeScheduler } from 'rxjs';
 import { HeroService } from '../hero.service';
 import { Hero } from '../hero/heroes';
-import { GetAllHeroesAction } from '../state/heroes.actions';
-import { HeroesState,HeroesStateEnum } from '../state/heroes.reducer';
+import { GetAllHeroesAction } from '../ngrx/heroes.actions';
+import { HeroesState,HeroesStateEnum } from '../ngrx/heroes.reducer';
 
 @Component({
   selector: 'app-dashboard',

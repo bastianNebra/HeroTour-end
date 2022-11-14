@@ -9,23 +9,20 @@
       <mat-spinner mode="indeterminate">Loading ...</mat-spinner>
     </div>
 
-
     <div *ngSwitchCase="HeroesStateEnum.LOADED">
         <h2>My Heroes</h2>
-            <ul >
-                <div mat-line *ngFor="let hero of state.heroes">
-                <button mat-flat-button type="button" color="primary"  (click)="onEdit(hero)">
-
-                  <span mat-card-title  class="badge">{{hero.id}}</span>
-                  <span mat-card-title  class="name">{{hero.name}}</span>
+            <ul class="heroes">
+                <li *ngFor="let hero of state.heroes">
+                <button type="button"  (click)="onEdit(hero)">
+                  <span class="badge">{{hero.id}}</span>
+                  <span class="name">{{hero.name}}</span>
                 </button>
 
+                  <div>
+                    <button type="button" (click)="onDelete(hero)">x</button>
+                  </div>
 
-                    <button mat-icon-button  (click)="onDelete(hero)">
-                      <mat-icon color="primary">delete</mat-icon>
-                    </button>
-
-              </div>
+            </li>
             </ul>
         </div>
 

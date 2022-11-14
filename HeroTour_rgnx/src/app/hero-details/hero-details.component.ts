@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {HeroService} from "../hero.service";
 import {Location} from "@angular/common";
-import {EditHeroAction, GetSelectedHeroAction, UpdateHeroAction} from "../state/heroes.actions";
+import {EditHeroAction, GetSelectedHeroAction, UpdateHeroAction} from "../ngrx/heroes.actions";
 import {Store} from "@ngrx/store";
-import {HeroesState, HeroesStateEnum} from "../state/heroes.reducer";
+import {HeroesState, HeroesStateEnum} from "../ngrx/heroes.reducer";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({

@@ -1,23 +1,9 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>{{title}}</span>
-  </mat-toolbar-row>
+<h1>{{title}}</h1>
+<nav>
 
+  <button mat-button routerLink="/dashboard" color="primary">Dashboard</button>
+  <button mat-button routerLink="/heroes" color="primary">Heroes</button>
+  <button mat-button routerLink="/new-hero" color="primary">New Hero</button>
 
-</mat-toolbar>
-
-<div class="container-xxl">
-
-  <div style="margin: 25px 50px 75px">
-
-    <ng-container >
-      <button class="button" mat-raised-button routerLink="/dashboard" color="primary">Dashboard</button>
-      <button class="button" mat-raised-button routerLink="/heroes" color="primary">Heroes</button>
-      <button mat-raised-button routerLink="/new-hero" color="primary">New Hero</button>
-    </ng-container>
-
-  </div>
-  <router-outlet></router-outlet>
-
-
-</div>
+</nav>
+<router-outlet></router-outlet>

@@ -7,8 +7,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
-import { HeroesEffects } from './state/heroes.effets';
-import { heroesReducer } from './state/heroes.reducer';
+import { HeroesEffects } from './ngrx/heroes.effets';
+import { heroesReducer } from './ngrx/heroes.reducer';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -28,12 +28,6 @@ import { NewHeroComponent } from './new-hero/new-hero.component';
 import { EditHeroComponent } from './edit-hero/edit-hero.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatDialogModule} from "@angular/material/dialog";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatIconModule} from "@angular/material/icon";
-import {MatProgressBarModule} from "@angular/material/progress-bar";
-import {environment} from "../environments/environment";
-import {MatLineModule} from "@angular/material/core";
-import {FlexModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -55,12 +49,7 @@ import {FlexModule} from "@angular/flex-layout";
     ),
     StoreModule.forRoot({heroesState: heroesReducer}),
     EffectsModule.forRoot([HeroesEffects]),
-
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production
-    }),
-
+    StoreDevtoolsModule.instrument(),
     MatSortModule,
     MatButtonModule,
     MatCardModule,
@@ -73,11 +62,6 @@ import {FlexModule} from "@angular/flex-layout";
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatProgressBarModule,
-    MatLineModule,
-    FlexModule,
 
   ],
   providers: [],

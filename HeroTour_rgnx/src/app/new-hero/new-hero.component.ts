@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms";
-import {HeroesState, HeroesStateEnum} from "../state/heroes.reducer";
+import {HeroesState, HeroesStateEnum} from "../ngrx/heroes.reducer";
 import {Store} from "@ngrx/store";
-import {NewHeroAction, SaveHeroAction} from "../state/heroes.actions";
+import {NewHeroAction, SaveHeroAction} from "../ngrx/heroes.actions";
 
 @Component({
   selector: 'app-new-hero',

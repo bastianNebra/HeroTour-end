@@ -4,13 +4,8 @@ import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { HeroService } from '../hero.service';
 import { Hero } from '../hero/heroes';
-import {
-  DeleteHeroAction,
-  DeleteHeroActionSuccess,
-  GetAllHeroesAction,
-  GetSelectedHeroAction
-} from '../state/heroes.actions';
-import { HeroesState, HeroesStateEnum } from '../state/heroes.reducer';
+import {DeleteHeroAction, GetAllHeroesAction, GetSelectedHeroAction} from '../ngrx/heroes.actions';
+import { HeroesState, HeroesStateEnum } from '../ngrx/heroes.reducer';
 import {Router} from "@angular/router";
 
 @Component({
