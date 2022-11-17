@@ -107,7 +107,7 @@ export class HeroesEffects {
       return this.heroesService.deleteHero(action.payload)
         .pipe(
           map((hero) => new DeleteHeroActionSuccess(hero)),
-          //catchError((err01)=>of(new DeleteHeroActionError(err01.message)))
+          catchError((err01)=>of(new DeleteHeroActionError(err01.message)))
         )
     })
   ));

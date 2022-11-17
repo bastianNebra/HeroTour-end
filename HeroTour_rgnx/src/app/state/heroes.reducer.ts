@@ -94,11 +94,14 @@ export function heroesReducer(state: HeroesState = initState, action:Action):Her
         case HeroesActionsTypes.DELETE_HERO:
           return {...state, dataState:HeroesStateEnum.LOADING}
         case HeroesActionsTypes.DELETE_HERO_SUCCESS:
-          let deleteHero: Hero = (<HeroesActions>action).payload
-          let index = state.heroes.indexOf(deleteHero);
-          let newHeroesList :Hero[]  = [...state.heroes]
+          let deletedHero: Hero = (<HeroesActions>action).payload
+          console.log("Selected Hero :" + deletedHero)
+          let index = state.heroes.indexOf(deletedHero);
+          console.log("INdex de Hero :" + index)
+          let newHeroesList= [...state.heroes]
           newHeroesList.splice(index,1);
-          return {...state, dataState: HeroesStateEnum.UPDATED,heroes:newHeroesList}
+
+          return {...state, dataState: HeroesStateEnum.LOADED,heroes:newHeroesList}
         case HeroesActionsTypes.DELETE_HERO_ERROR:
           return {...state,dataState:HeroesStateEnum.ERROR, errorMessage:(<HeroesActions>action).payload}
 

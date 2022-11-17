@@ -45,7 +45,7 @@ export class HeroesComponent implements OnInit {
   }
 
   onDelete(hero: Hero) {
-      this.store.dispatch(new DeleteHeroAction(hero))
+      this.store.dispatch(new DeleteHeroAction(hero));
   }
 
 }

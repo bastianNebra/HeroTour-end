@@ -12,23 +12,22 @@
       <button mat-button (click)="newHero()">New Hero</button>
     </div>
 
-    <div *ngIf="data.dataState==HeroeStateEnum.NEW">
+    <div *ngIf="data.dataState==HeroeStateEnum.NEW" >
 
-      <form [formGroup]="heroFormGroup" (ngSubmit)="onSaveHero()">
+      <form [formGroup]="heroFormGroup" (ngSubmit)="onSaveHero()" fxLayout="coloumn">
+
         <mat-form-field>
           <label for="name">Name Hero</label>
           <input matInput type="text" formControlName="name" id="name" required
                  [ngClass]="{'invalid':submitted && heroFormGroup.controls['name'].errors}">
         </mat-form-field>
 
-        <div mat-dialog-actions >
-          <button mat-button [disabled]="heroFormGroup.invalid" type="submit"> Save</button>
+        <div  >
+          <button mat-raised-button [disabled]="heroFormGroup.invalid" type="submit" color="primary"> Save</button>
         </div>
       </form>
 
 
-    </div>
-
-
   </div>
+</div>
 </div>
